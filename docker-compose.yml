@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  postgresql:
+    image: 'postgres:15.2'
+    container_name: bihan-database
+    environment:
+      - POSTGRES_DB=bihan
+      - POSTGRES_USER=bihan
+      - POSTGRES_PASSWORD=bihan
+    ports:
+      - '29332:5432'

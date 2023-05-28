@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:29332/bihan
+    username: bihan
+    password: bihan
+
+server.port: 4010
