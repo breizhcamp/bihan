@@ -7,7 +7,7 @@ interface LinkPort {
 
     fun getLink(id: String): Link?
 
-    fun addLink(url: String, expirationDate: Instant?): Link
+    fun addLink(url: String, expirationDate: Instant?, id: String?): Link
 
     fun purgeLinks()
 }

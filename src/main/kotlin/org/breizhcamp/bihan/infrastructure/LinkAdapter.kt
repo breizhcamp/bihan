@@ -23,12 +23,12 @@ class LinkAdapter(
     }
 
     @Transactional
-    override fun addLink(url: String, expirationDate: Instant?): Link {
-        val id = sha256sum((expirationDate?.toString() ?: "") + "|$url")
+    override fun addLink(url: String, expirationDate: Instant?, id: String?): Link {
+        val dbId = sha256sum((expirationDate?.toString() ?: "") + "|$url")
 
-        val linkDB = linkRepo.findByIdOrNull(id)?.let {
+        val linkDB = linkRepo.findByIdOrNull(dbId)?.let {
             return it.toLink()
-        } ?: LinkDB(id, makeLinkId(), url, expirationDate)
+        } ?: LinkDB(dbId, makeLinkId(id), url, expirationDate)
 
         return linkRepo.save(linkDB).toLink()
     }
@@ -39,11 +39,13 @@ class LinkAdapter(
         linkRepo.deleteByExpirationDateBefore(Instant.now())
     }
 
-    private fun makeLinkId(): String {
+    private fun makeLinkId(id: String?): String {
+        id?.let { if (linkRepo.findByLinkId(it) == null) return it }
+
         for (i in 0..1000) {
-            val id = (0..5).map { ('A'..'z').random() }.joinToString("")
-            if (linkRepo.findByLinkId(id) == null) {
-                return id
+            val genId = (0..5).map { (('a'..'z') + ('A'..'Z')).random() }.joinToString("")
+            if (linkRepo.findByLinkId(genId) == null) {
+                return genId
             }
         }
 

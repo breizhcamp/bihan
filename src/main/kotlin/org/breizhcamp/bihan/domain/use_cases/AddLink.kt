@@ -9,6 +9,6 @@ class AddLink(
     private val linkPort: LinkPort,
 ) {
 
-    fun add(url: String, expirationDate: Instant?): String = linkPort.addLink(url, expirationDate).id
+    fun add(url: String, expirationDate: Instant?, id: String?): String = linkPort.addLink(url, expirationDate, id).id
 
 }

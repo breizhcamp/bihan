@@ -19,10 +19,10 @@ class AdminCtrl(
     private val addLink: AddLink,
 ) {
 
-    @PostMapping("/api/add")
+    @PostMapping("/api/links")
     fun add(@RequestBody link: AddLinkReq, @RequestHeader("Authorization") auth: String?): AddLinkRes {
         if (auth != "ApiKey ${config.apiKey}") throw FileNotFoundException()
-        return AddLinkRes(addLink.add(link.url, link.expirationDate?.toInstant()))
+        return AddLinkRes(addLink.add(link.url, link.expirationDate?.toInstant(), link.id))
     }
 
     @ExceptionHandler(FileNotFoundException::class) @ResponseStatus(HttpStatus.NOT_FOUND)
