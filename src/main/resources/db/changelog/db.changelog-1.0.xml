@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <changeSet id="1" author="alex">
+        <createTable tableName="link">
+            <column name="id" type="text"><constraints primaryKey="true" nullable="false"/></column>
+            <column name="link_id" type="text"><constraints nullable="false"/></column>
+            <column name="url" type="text"><constraints nullable="false"/></column>
+
+            <column name="expiration_date" type="timestamp"/>
+        </createTable>
+
+        <createIndex tableName="link" indexName="link_link_id"><column name="link_id" /></createIndex>
+        <createIndex tableName="link" indexName="link_expiration_date"><column name="expiration_date" /></createIndex>
+    </changeSet>
+
+
+</databaseChangeLog>

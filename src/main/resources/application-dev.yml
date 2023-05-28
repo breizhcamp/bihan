@@ -4,4 +4,11 @@ spring:
     username: bihan
     password: bihan
 
+  jpa:
+    show-sql: true
+
 server.port: 4010
+
+bihan:
+  public-url: http://localhost:4010/
+  api-key: 1234567890
