@@ -131,9 +131,8 @@
 				<artifactId>jib-maven-plugin</artifactId>
 				<version>2.5.0</version>
 				<configuration>
-					<to>
-						<image>${image.path}</image>
-					</to>
+					<from><image>eclipse-temurin:21-noble</image></from>
+					<to><image>${image.path}</image></to>
 				</configuration>
 			</plugin>
 		</plugins>
