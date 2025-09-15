@@ -9,5 +9,5 @@ interface LinkPort {
 
     fun addLink(url: String, expirationDate: Instant?, id: String?): Link
 
-    fun purgeLinks()
+    fun purgeLinks(): Long
 }

@@ -16,8 +16,8 @@ class PurgeLinksCron(
     @Scheduled(fixedDelay = 60*60, timeUnit = TimeUnit.SECONDS, initialDelay = 10)
     fun purge() {
         logger.info { "Purging links" }
-        purgeLinks.purgeLinks()
-        logger.info { "Purging links done" }
+        val nbPurge = purgeLinks.purgeLinks()
+        logger.info { "Purging [${nbPurge}] links done" }
     }
 
 }
