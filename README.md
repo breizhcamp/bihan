@@ -158,8 +158,8 @@ Push to registry:
 
 ## 📜 License
 
-[Bihan][repo_url] is free and open-source software licensed under
-the [GPL-3.0 License][repo_license_url]
+[Bihan](https://github.com/breizhcamp/bihan/) is free and open-source software licensed under
+the [GPL-3.0 License](https://github.com/breizhcamp/bihan/blob/main/LICENSE)
 
 ---
 
