@@ -36,7 +36,7 @@ class LinkAdapter(
     @CacheEvict(cacheNames = ["links"], allEntries = true)
     @Transactional
     override fun purgeLinks(): Long {
-        return linkRepo.deleteByExpirationDateBefore(Instant.now())
+        return linkRepo.deleteByExpirationDateBefore(Instant.now()) ?: 0
     }
 
     private fun makeLinkId(id: String?): String {

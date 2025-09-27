@@ -10,5 +10,5 @@ interface LinkRepo: JpaRepository<LinkDB, String> {
 
     fun findByLinkId(linkId: String): LinkDB?
 
-    fun deleteByExpirationDateBefore(expirationDate: Instant): Long
+    fun deleteByExpirationDateBefore(expirationDate: Instant): Long?
 }
