@@ -2,13 +2,20 @@ spring:
   liquibase.changeLog: classpath:/db/changelog/db.changelog-master.xml
 
   datasource:
-    url: jdbc:postgresql://${POSTGRESQL_ADDON_HOST}:${POSTGRESQL_ADDON_PORT}/${POSTGRESQL_ADDON_DB}
-    username: ${POSTGRESQL_ADDON_USER}
-    password: ${POSTGRESQL_ADDON_PASSWORD}
+    url: jdbc:postgresql://${POSTGRESQL_HOST}:${POSTGRESQL_PORT}/${POSTGRESQL_DB}?currentSchema=${POSTGRESQL_SCHEMA}
+    username: ${POSTGRESQL_USER}
+    password: ${POSTGRESQL_PASSWORD}
 
   cache:
     caffeine.spec: maximumSize=1000
 
+server:
+  forward-headers-strategy: FRAMEWORK
+  tomcat.remoteip:
+    remote_ip_header: X-Forwarded-For
+    protocol_header: X-Forwarded-Proto
+
 bihan:
   base-redirect: https://www.breizhcamp.org/
   public-url: https://bzh.camp/
+  api-key: ${BH_API_KEY}
