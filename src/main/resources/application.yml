@@ -1,5 +1,6 @@
 spring:
   liquibase.changeLog: classpath:/db/changelog/db.changelog-master.xml
+  jpa.open-in-view: false
 
   datasource:
     url: jdbc:postgresql://${POSTGRESQL_HOST}:${POSTGRESQL_PORT}/${POSTGRESQL_DB}?currentSchema=${POSTGRESQL_SCHEMA}
@@ -8,6 +9,8 @@ spring:
 
   cache:
     caffeine.spec: maximumSize=1000
+
+management.server.port: 8081
 
 server:
   forward-headers-strategy: FRAMEWORK
