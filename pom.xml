@@ -56,9 +56,9 @@
 			<artifactId>kotlin-stdlib</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.github.microutils</groupId>
-			<artifactId>kotlin-logging-jvm</artifactId>
-			<version>3.0.5</version>
+            <groupId>io.github.oshai</groupId>
+            <artifactId>kotlin-logging-jvm</artifactId>
+            <version>7.0.13</version>
 		</dependency>
 
 

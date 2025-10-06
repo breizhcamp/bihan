@@ -1,6 +1,6 @@
 package org.breizhcamp.bihan.application.cron
 
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.breizhcamp.bihan.domain.use_cases.PurgeLinks
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
