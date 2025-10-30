@@ -4,6 +4,7 @@ import org.breizhcamp.bihan.domain.entities.Link
 import org.breizhcamp.bihan.domain.use_cases.ports.LinkPort
 import org.breizhcamp.bihan.infrastructure.db.model.LinkDB
 import org.breizhcamp.bihan.infrastructure.db.repos.LinkRepo
+import org.springframework.cache.CacheManager
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.data.repository.findByIdOrNull
@@ -14,7 +15,8 @@ import java.time.Instant
 
 @Component
 class LinkAdapter(
-    private val linkRepo: LinkRepo
+    private val linkRepo: LinkRepo,
+    private val cacheManager: CacheManager,
 ): LinkPort {
 
     @Cacheable("links")
@@ -23,6 +25,7 @@ class LinkAdapter(
     }
 
     @Transactional
+    @CacheEvict(cacheNames = ["links"])
     override fun addLink(url: String, expirationDate: Instant?, id: String?): Link {
         val dbId = sha256sum((expirationDate?.toString() ?: "") + "|$url")
 
@@ -30,7 +33,9 @@ class LinkAdapter(
             return it.toLink()
         } ?: LinkDB(dbId, makeLinkId(id), url, expirationDate)
 
-        return linkRepo.save(linkDB).toLink()
+        val res = linkRepo.save(linkDB).toLink()
+        cacheManager.getCache("links")?.evict(res.id)
+        return res
     }
 
     @CacheEvict(cacheNames = ["links"], allEntries = true)
