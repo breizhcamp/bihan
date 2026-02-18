@@ -19,13 +19,12 @@ class LinkAdapter(
     private val cacheManager: CacheManager,
 ): LinkPort {
 
-    @Cacheable("links")
+    @Cacheable("links", key = "#id")
     override fun get(id: String): Link? {
         return linkRepo.findByLinkId(id)?.toLink()
     }
 
     @Transactional
-    @CacheEvict(cacheNames = ["links"])
     override fun add(url: String, expirationDate: Instant?, id: String?): Link {
         val dbId = sha256sum((expirationDate?.toString() ?: "") + "|$url")
 
@@ -34,12 +33,12 @@ class LinkAdapter(
         } ?: LinkDB(dbId, makeLinkId(id), url, expirationDate)
 
         val res = linkRepo.save(linkDB).toLink()
-        cacheManager.getCache("links")?.evict(res.id)
+        cacheManager.getCache("links")?.put(res.id, res)
         return res
     }
 
-    @CacheEvict(cacheNames = ["links"], key = "#id")
     @Transactional
+    @CacheEvict(cacheNames = ["links"], key = "#id")
     override fun delete(id: String): Boolean {
         return linkRepo.deleteByLinkId(id) > 0
     }
