@@ -13,7 +13,7 @@ class AddLink(
 ) {
 
     fun add(url: String, expirationDate: Instant?, id: String?): String {
-        val createdId = linkPort.addLink(url, expirationDate, id).id
+        val createdId = linkPort.add(url, expirationDate, id).id
         logger.info { "Adding link [${createdId}] to $url" }
         return createdId
     }

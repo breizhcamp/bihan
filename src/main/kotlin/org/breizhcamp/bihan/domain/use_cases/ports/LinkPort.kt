@@ -5,9 +5,9 @@ import java.time.Instant
 
 interface LinkPort {
 
-    fun getLink(id: String): Link?
+    fun get(id: String): Link?
+    fun add(url: String, expirationDate: Instant?, id: String?): Link
+    fun delete(id: String): Boolean
 
-    fun addLink(url: String, expirationDate: Instant?, id: String?): Link
-
-    fun purgeLinks(): Long
+    fun purge(): Long
 }

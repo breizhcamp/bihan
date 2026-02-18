@@ -11,7 +11,7 @@ class GetLink(
 ) {
 
     fun get(id: String): String {
-        val link = linkPort.getLink(id) ?: return bihanConfig.baseRedirect
+        val link = linkPort.get(id) ?: return bihanConfig.baseRedirect
         if (link.isExpired()) return bihanConfig.baseRedirect
 
         return link.url

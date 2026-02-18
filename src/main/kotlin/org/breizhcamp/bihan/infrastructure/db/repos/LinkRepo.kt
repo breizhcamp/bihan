@@ -9,6 +9,7 @@ import java.time.Instant
 interface LinkRepo: JpaRepository<LinkDB, String> {
 
     fun findByLinkId(linkId: String): LinkDB?
+    fun deleteByLinkId(linkId: String): Long
 
     fun deleteByExpirationDateBefore(expirationDate: Instant): Long?
 }
