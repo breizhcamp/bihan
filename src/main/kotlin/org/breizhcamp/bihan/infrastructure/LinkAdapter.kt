@@ -41,8 +41,7 @@ class LinkAdapter(
     @CacheEvict(cacheNames = ["links"], key = "#id")
     @Transactional
     override fun delete(id: String): Boolean {
-        val nb = linkRepo.deleteByLinkId(id)
-        return nb > 0
+        return linkRepo.deleteByLinkId(id) > 0
     }
 
     @CacheEvict(cacheNames = ["links"], allEntries = true)
@@ -52,11 +51,11 @@ class LinkAdapter(
     }
 
     private fun makeLinkId(id: String?): String {
-        id?.let { if (linkRepo.findByLinkId(it) == null) return it }
+        id?.let { if (!linkRepo.existsByLinkId(it)) return it }
 
         for (i in 0..1000) {
             val genId = (0..5).map { (('a'..'z') + ('A'..'Z')).random() }.joinToString("")
-            if (linkRepo.findByLinkId(genId) == null) {
+            if (!linkRepo.existsByLinkId(genId)) {
                 return genId
             }
         }
