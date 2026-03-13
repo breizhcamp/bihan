@@ -183,6 +183,17 @@
 							<implementation>com.google.cloud.tools.jib.maven.extension.springboot.JibSpringBootExtension</implementation>
 						</pluginExtension>
 					</pluginExtensions>
+
+					<container>
+						<jvmFlags>
+							<jvmFlag>-XX:MaxRAMPercentage=65.0</jvmFlag>
+							<jvmFlag>-XX:InitialRAMPercentage=65.0</jvmFlag>
+							<jvmFlag>-XX:ReservedCodeCacheSize=128m</jvmFlag>
+							<jvmFlag>-Xss256k</jvmFlag>
+							<jvmFlag>-XX:+ExitOnOutOfMemoryError</jvmFlag>
+							<jvmFlag>-XX:NativeMemoryTracking=summary</jvmFlag>
+						</jvmFlags>
+					</container>
 				</configuration>
 			</plugin>
 		</plugins>
